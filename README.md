@@ -3,6 +3,10 @@
 > Sistema de Guiagem, Navegação e Controle (GNC) para software de voo embarcado em C++.
 > Inspirado na arquitetura utilizada em foguetes modernos como o Falcon 9 da SpaceX.
 
+* * *
+
+![dd168576bc23407991d88bb8cc39d7a2](file:///C:/Users/jmmartins/OneDrive%20-%20Neogrid/Imagens/Typedown/dd168576-bc23-4079-91d8-8bb8cc39d7a2.png?msec=1777316880919)
+
 ---
 
 ## 🚀 Visão Geral
