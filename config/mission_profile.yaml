@@ -1,0 +1,20 @@
+mission:
+  name: "Recon Profile Alpha"
+  frame: "NED"
+  loiter_after_completion: false
+
+waypoints:
+  - north_m: 300.0
+    east_m: 0.0
+    down_m: -120.0
+    target_speed_mps: 18.0
+
+  - north_m: 600.0
+    east_m: 250.0
+    down_m: -140.0
+    target_speed_mps: 20.0
+
+  - north_m: 900.0
+    east_m: 450.0
+    down_m: -130.0
+    target_speed_mps: 17.0

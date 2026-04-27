@@ -1,0 +1,15 @@
+vehicle:
+  name: "UAV-FW-01"
+  mass_kg: 5.8
+  wing_span_m: 1.9
+  reference_area_m2: 0.58
+  max_speed_mps: 35.0
+  cruise_speed_mps: 18.0
+  min_speed_mps: 12.0
+
+actuators:
+  aileron_limit_deg: 25.0
+  elevator_limit_deg: 25.0
+  rudder_limit_deg: 30.0
+  throttle_min: 0.0
+  throttle_max: 1.0

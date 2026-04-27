@@ -1,0 +1,22 @@
+flight_loop:
+  dt_s: 0.01
+  sim_duration_s: 90.0
+
+estimation:
+  ekf:
+    process_noise: 0.05
+    gps_position_noise: 2.0
+    gps_velocity_noise: 0.5
+    barometer_noise: 1.5
+
+guidance:
+  acceptance_radius_m: 15.0
+  l1_gain: 1.0
+
+control:
+  altitude_pid: {kp: 0.08, ki: 0.01, kd: 0.03}
+  heading_pid:  {kp: 1.00, ki: 0.02, kd: 0.08}
+  speed_pid:    {kp: 0.05, ki: 0.02, kd: 0.01}
+  roll_rate_pid:  {kp: 0.10, ki: 0.02, kd: 0.005}
+  pitch_rate_pid: {kp: 0.12, ki: 0.02, kd: 0.006}
+  yaw_rate_pid:   {kp: 0.08, ki: 0.01, kd: 0.003}

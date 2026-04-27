@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/gnc_app.dir/src/control/actuator_controller.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/control/actuator_controller.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/control/pid_controller.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/control/pid_controller.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/control/rate_controller.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/control/rate_controller.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/estimation/ekf.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/estimation/ekf.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/estimation/state_estimator.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/estimation/state_estimator.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/flight_loop/flight_loop.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/flight_loop/flight_loop.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/gnc_system.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/gnc_system.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/guidance/guidance_law.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/guidance/guidance_law.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/guidance/trajectory_planner.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/guidance/trajectory_planner.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/main.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/main.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/sensors/barometer.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/sensors/barometer.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/sensors/gps.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/sensors/gps.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/sensors/imu.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/sensors/imu.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/utils/config_loader.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/utils/config_loader.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/utils/data_logger.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/utils/data_logger.cpp.o.d"
+  "CMakeFiles/gnc_app.dir/src/utils/math_utils.cpp.o"
+  "CMakeFiles/gnc_app.dir/src/utils/math_utils.cpp.o.d"
+  "gnc_app"
+  "gnc_app.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/gnc_app.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
