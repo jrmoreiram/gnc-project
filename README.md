@@ -1,4 +1,4 @@
-# Flight Software GNC - C++
+# Flight Software GNC — C++
 
 > Sistema de Guiagem, Navegação e Controle (GNC) para software de voo embarcado em C++.
 > Inspirado na arquitetura utilizada em foguetes modernos como o Falcon 9 da SpaceX.
