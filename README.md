@@ -70,3 +70,7 @@ Seguir rigorosamente a norma C++11, e aplicar as convenções de estilo Google p
 ## 📄 Licença
 
 Este projeto é licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+## 📌 Nota
+> Este projeto é educacional e de simulação implementado por um desenvolvedor👨‍💻 entusiasta aeroespacial🚀.
+> Sistemas de voo reais exigem certificação, validação formal e hardware dedicado.
