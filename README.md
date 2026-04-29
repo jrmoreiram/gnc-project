@@ -1,270 +1,67 @@
-# Flight Software GNC — C++
+# README.md
 
-> Sistema de Guiagem, Navegação e Controle (GNC) para software de voo embarcado em C++.
-> Inspirado na arquitetura utilizada em foguetes modernos como o Falcon 9 da SpaceX.
+## Visão Geral
 
-<img width="986" height="661" alt="image" src="https://github.com/user-attachments/assets/d078862b-0dc7-4efe-8719-0825fdd05803" />
+Este projeto é uma implementação de sistema de orientação, navegação e controle (GNC) para software de voo em C++. Inspirado pela arquitetura do Falcon 9 da SpaceX, visa fornecer uma solução robusta e eficiente para missões espaciais.
 
-## 🚀 Visão Geral
+## Arquitetura utilizada
 
-Este projeto implementa um sistema GNC completo em C++ com ciclo de controle de **100 Hz**, cobrindo as camadas de:
+O sistema foi projetado utilizando uma arquitetura modular, permitindo fácil manutenção e escalabilidade. Os módulos principais incluem: controle de atitude, navegação inercial, e gerenciamento de missão, todos interconectados através de uma interface bem definida.
 
-- **Navigation** — Filtro de Kalman Estendido (EKF) com fusão IMU + GPS
-- **Guidance** — Gerador de trajetória com interpolação de waypoints
-- **Control** — Controlador PID de atitude (roll / pitch / yaw) com TVC
-- **Flight Loop** — Orquestração do ciclo de controle principal
-
----
-
-## 🏗️ Arquitetura GNC
+## Estrutura de diretórios
 
 ```
-SENSORS (IMU / GPS / Star Tracker)
-         │
-         ▼
-NAVIGATION (Estimação de Estado)
-  └─ ExtendedKalmanFilter (EKF)
-  └─ Fusão de Sensores
-  └─ Posição / Velocidade / Atitude
-         │
-         ▼
-GUIDANCE (Planejamento de Trajetória)
-  └─ GuidanceSystem
-  └─ Waypoints + Interpolação Linear
-  └─ Perfil de Velocidade / Altitude
-         │
-         ▼
-CONTROL (Controlador PID / LQR)
-  └─ AttitudeController
-  └─ PIDController (roll, pitch, yaw)
-  └─ TVC (Thrust Vector Control)
-         │
-         ▼
-ACTUATORS (Motores / TVC / RCS)
-  └─ Gimbal do Motor
-  └─ Propulsores RCS
-         │
-         └──────────────────► Feedback Loop
+/gnc-project
+    /src         # Diretório de código-fonte
+    /include     # Cabeçalhos
+    /tests       # Testes unitários
+    /docs        # Documentação
 ```
 
----
+## Módulos Principais
 
-## 📁 Estrutura de Diretórios
+- `Controle de Atitude`: Responsável pela orientação da nave.
+- `Navegação Inercial`: Processa dados de sensores para determinar a posição e velocidade.
+- `Gerenciamento de Missão`: Coordena as atividades e objetivos da missão.
 
-```
-flight-software/
-├── CMakeLists.txt
-├── README.md
-│
-├── include/
-│   ├── core/
-│   │   ├── vector3.h            # struct Vector3
-│   │   ├── vehicle_state.h      # struct VehicleState
-│   │   └── types.h
-│   ├── gnc/
-│   │   ├── navigation/
-│   │   │   └── ekf.h            # ExtendedKalmanFilter
-│   │   ├── guidance/
-│   │   │   ├── waypoint.h       # struct Waypoint
-│   │   │   └── guidance.h       # GuidanceSystem
-│   │   └── control/
-│   │       ├── pid_controller.h # PIDController
-│   │       └── attitude_ctrl.h  # AttitudeController
-│   └── flight/
-│       └── flight_software.h
-│
-├── src/
-│   ├── main.cpp
-│   ├── core/
-│   │   ├── vector3.cpp
-│   │   └── vehicle_state.cpp
-│   ├── gnc/
-│   │   ├── navigation/
-│   │   │   └── ekf.cpp
-│   │   ├── guidance/
-│   │   │   ├── waypoint.cpp
-│   │   │   └── guidance.cpp
-│   │   └── control/
-│   │       ├── pid_controller.cpp
-│   │       └── attitude_ctrl.cpp
-│   └── flight/
-│       └── flight_software.cpp
-│
-├── simulation/
-│   ├── sim_sensors.cpp
-│   ├── sim_vehicle.cpp
-│   └── world_model.h
-│
-├── tests/
-│   ├── test_ekf.cpp
-│   ├── test_guidance.cpp
-│   ├── test_pid.cpp
-│   └── test_flight_loop.cpp
-│
-├── config/
-│   └── mission.yaml
-│
-└── tools/
-    └── plot_telemetry.py
-```
+## Build e Run project
 
----
-
-## 🧩 Módulos Principais
-
-### `core/` — Tipos e Matemática Base
-
-| Arquivo | Conteúdo |
-|---|---|
-| `vector3.h` | `struct Vector3` com operações aritméticas, norma e normalização |
-| `vehicle_state.h` | `struct VehicleState` com posição, velocidade, atitude, massa e tempo |
-
-### `gnc/navigation/` — Estimação de Estado
-
-| Arquivo | Conteúdo |
-|---|---|
-| `ekf.h / ekf.cpp` | `ExtendedKalmanFilter` — predição via IMU + atualização via GPS |
-
-**Ciclo EKF:**
-1. `predict(accel, dt)` — integra dinâmica com aceleração medida
-2. `updateGPS(pos)` — corrige estimativa com medição GPS
-3. `getPosition()` / `getVelocity()` — retorna estado estimado
-
-### `gnc/guidance/` — Planejamento de Trajetória
-
-| Arquivo | Conteúdo |
-|---|---|
-| `waypoint.h` | `struct Waypoint` com posição, velocidade e tempo |
-| `guidance.h / guidance.cpp` | `GuidanceSystem` com interpolação linear entre waypoints |
-
-### `gnc/control/` — Controle de Atitude
-
-| Arquivo | Conteúdo |
-|---|---|
-| `pid_controller.h / .cpp` | `PIDController` com anti-windup e saturação de saída |
-| `attitude_ctrl.h / .cpp` | `AttitudeController` com PIDs independentes para roll, pitch e yaw |
-
-**Ganhos padrão:**
-
-| Eixo | Kp | Ki | Kd |
-|---|---|---|---|
-| Roll | 2.0 | 0.1 | 0.5 |
-| Pitch | 2.5 | 0.1 | 0.6 |
-| Yaw | 1.5 | 0.05 | 0.4 |
-
-### `flight/` — Loop Principal
-
-| Arquivo | Conteúdo |
-|---|---|
-| `flight_software.h / .cpp` | `FlightSoftware` — orquestra EKF + Guidance + Control a 100 Hz |
-
-**Ciclo de controle (100 Hz / 10ms):**
-```
-1. readIMU()       → ekf.predict()
-2. readGPS()       → ekf.updateGPS()
-3. guidance.getReference(t)
-4. attCtrl.compute(ref, state, dt)
-5. sendTVCCommand(cmd)
-6. logTelemetry()
-```
-
----
-
-## ⚙️ Build
-
-### Requisitos
-
-- CMake >= 3.16
-- GCC >= 11 ou Clang >= 13
-- C++17 ou superior
-- Google Test (para testes unitários)
-
-### Compilar
-
+Para compilar o projeto, utilize os seguintes comandos:
 ```bash
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j$(nproc)
+cmake ..
+make
 ```
 
-### Executar simulação
-
+Para executar:
 ```bash
-./flight_software
+./gnc_project_executable
 ```
 
-### Rodar testes
+## Testes
 
+Os testes podem ser executados com:
 ```bash
-ctest --output-on-failure
+cd tests
+./run_tests.sh
 ```
 
----
+## Ferramentas
 
-## 🧪 Testes
+- CMake - Para gerenciamento de construção.
+- Google Test - Para testes unitários.
+- Doxygen - Para geração de documentação.
 
-| Arquivo | O que testa |
-|---|---|
-| `test_ekf.cpp` | Convergência do filtro com ruído sintético |
-| `test_pid.cpp` | Resposta ao degrau, overshoot e tempo de assentamento |
-| `test_guidance.cpp` | Interpolação entre waypoints e extrapolação |
-| `test_flight_loop.cpp` | Integração completa do ciclo GNC |
+## Convenções de Código
 
----
+Seguir rigorosamente a norma C++11, e aplicar as convenções de estilo Google para nomes de variáveis e formatação.
 
-## 🛠️ Ferramentas
+## Roadmap
 
-### `tools/plot_telemetry.py`
+- [ ] Finalizar Módulo de Controle de Atitude
+- [ ] Implementação de navegação por GPS
+- [ ] Testes de integração
 
-Script Python para visualizar os dados de telemetria gerados pela simulação:
+## Licença
 
-```bash
-python3 tools/plot_telemetry.py logs/telemetry.csv
-```
-
-Gera gráficos de:
-- Posição (x, y, z) ao longo do tempo
-- Velocidade e aceleração
-- Atitude (roll, pitch, yaw)
-- Comandos TVC
-
----
-
-## 📐 Convenções de Código
-
-- **Padrão:** C++17
-- **Formatação:** `.clang-format` (Google Style)
-- **Análise estática:** `.clang-tidy`
-- **Documentação:** Doxygen (`/** */`)
-- **Unidades:** SI — metros, segundos, radianos, kg
-
----
-
-## 🔭 Roadmap
-
-- [ ] Implementar controlador LQR como alternativa ao PID
-- [ ] Adicionar modelo de perturbação atmosférica
-- [ ] Integrar com RTOS (FreeRTOS / VxWorks)
-- [ ] Suporte a múltiplos computadores de voo (redundância)
-- [ ] Implementar MPC (Model Predictive Control)
-- [ ] Adicionar módulo de detecção e isolamento de falhas (FDI)
-
----
-
-## 📚 Referências
-
-- Wie, B. — *Space Vehicle Dynamics and Control* (AIAA, 2008)
-- Stevens, B. L. — *Aircraft Control and Simulation* (Wiley, 2015)
-- Zarchan, P. — *Tactical and Strategic Missile Guidance* (AIAA, 2012)
-- SpaceX AMA — Reddit r/spacex (2015)
-
----
-
-## 📄 Licença
-
-MIT License — veja `LICENSE` para detalhes.
-
----
-
-> **Nota:** Este projeto é educacional e de simulação implementado por um desenvolvedor👨‍💻 entusiasta aeroespacial🚀.
-> Sistemas de voo reais exigem certificação, validação formal e hardware dedicado.
+Este projeto é licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
