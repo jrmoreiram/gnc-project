@@ -26,7 +26,6 @@ O sistema foi projetado utilizando uma arquitetura modular, permitindo fácil ma
 
 Para compilar o projeto, utilize os seguintes comandos:
 ```bash
-```bash
 cd /home/jmmartins/Workspace/gnc-project
 cmake -S . -B build
 cmake --build build -j
