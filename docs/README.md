@@ -33,7 +33,7 @@ sudo apt-get install -y build-essential cmake libeigen3-dev libyaml-cpp-dev
 ## Build e execução
 
 ```bash
-cd /home/ubuntu/gnc-project
+cd /home/jmmartins/Workspace/gnc-project
 cmake -S . -B build
 cmake --build build -j
 ./build/gnc_app
