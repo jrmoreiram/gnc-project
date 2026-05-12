@@ -35,3 +35,7 @@ add_executable(gnc_app
 
 target_include_directories(gnc_app PRIVATE include)
 target_link_libraries(gnc_app PRIVATE Eigen3::Eigen yaml-cpp)
+
+# Add tests subdirectory
+enable_testing()
+add_subdirectory(tests)
