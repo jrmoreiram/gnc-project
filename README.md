@@ -21,6 +21,7 @@ O sistema foi projetado utilizando uma **arquitetura modular e em camadas**, per
     /build                 # Diretório de compilação
     /config                # Arquivos de configuração
     /docs                  # Documentação
+		/tests
     /flight_log.csv        # Arquivo de log com dados de voo simulados
 ```
 
